@@ -71,6 +71,12 @@ abstract class PostgreSQLExecutionContext {
   /// to [PostgreSQLConnection.transaction]), this will rollback the transaction.
   void cancelTransaction({String? reason});
 
+  /// Cancels a transaction on this context with error.
+  ///
+  /// If this context is an instance of [PostgreSQLConnection], this method has no effect. If the context is a transaction context (passed as the argument
+  /// to [PostgreSQLConnection.transaction]), this will rollback the transaction.
+  void cancelTransactionWithError(Object e, StackTrace st);
+
   /// Executes a query on this connection and returns each row as a [Map].
   ///
   /// This method constructs and executes a query in the same way as [query], but returns each row as a [Map].

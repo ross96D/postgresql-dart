@@ -41,6 +41,16 @@ class _TransactionProxy extends Object
     throw _TransactionRollbackException(reason ?? 'Reason not given.');
   }
 
+  @override
+  void cancelTransactionWithError(Object e, StackTrace st) {
+    if (e is Error || e is Exception) {
+      // ignore: only_throw_errors
+      throw Error.throwWithStackTrace(e, st);
+    } else {
+      throw _TransactionRollbackException('no reason');
+    }
+  }
+
   Future startTransaction(dynamic _) async {
     dynamic result;
     try {

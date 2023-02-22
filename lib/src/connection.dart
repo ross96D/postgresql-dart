@@ -283,6 +283,11 @@ class PostgreSQLConnection extends Object
     // Default is no-op
   }
 
+  @override
+  void cancelTransactionWithError(Object e, StackTrace st) {
+    // Default is no-op
+  }
+
   ////////
 
   void _transitionToState(_PostgreSQLConnectionState newState) {
@@ -613,6 +618,9 @@ abstract class _PostgreSQLExecutionContextMixin
 
   @override
   void cancelTransaction({String? reason});
+
+  @override
+  void cancelTransactionWithError(Object e, StackTrace st);
 
   Future<QueryResult<T>> _enqueue<T>(Query<T> query,
       {int timeoutInSeconds = 30}) async {
